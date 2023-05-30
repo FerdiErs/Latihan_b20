@@ -1,2 +1,2 @@
-# Latihan_b20
+#Non Graded Challenge 
 Bootcamp Data Science by Hacktiv8
