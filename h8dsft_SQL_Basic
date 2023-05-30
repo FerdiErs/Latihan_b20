@@ -1,0 +1,86 @@
+## Selecting data 
+SELECT *
+FROM bigquery-public-data.san_francisco.bikeshare_trips
+## Selecting data
+SELECT *
+FROM bigquery-public-data.san_francisco.bikeshare_stations
+
+##Table bikeshare_trips : trip_id, start_date, subscriber_type, start_station_name, dan start_station_id
+##Table bikeshare_stations : station_id, name, dan landmark 
+
+## Join Table 
+
+SELECT 
+  trip.trip_id,
+  trip.start_date,
+  trip.subscriber_type,
+  trip.start_station_name,
+  trip.start_station_id,
+  stas.station_id,
+  stas.name,
+  stas.landmark
+FROM 
+bigquery-public-data.san_francisco.bikeshare_trips AS trip 
+  JOIN
+bigquery-public-data.san_francisco.bikeshare_stations AS stas
+ON trip.start_station_id  = stas.station_id
+
+##Q1 = 1 JANUARI-31 MARET
+SELECT 
+  trip.trip_id,
+  trip.start_date,
+  trip.subscriber_type,
+  trip.start_station_name,
+  trip.start_station_id,
+  stas.station_id,
+  stas.name,
+  stas.landmark
+FROM 
+bigquery-public-data.san_francisco.bikeshare_trips AS trip 
+  JOIN
+bigquery-public-data.san_francisco.bikeshare_stations AS stas
+ON trip.start_station_id  = stas.station_id
+WHERE trip.subscriber_type ='Subscriber' and trip.start_date BETWEEN '2016-01-01 00:00:01' AND '2016-03-31 23:59:59' and stas.landmark='Redwood City'
+
+## Q2 = 1 APRIL - 30 JUNI
+SELECT 
+  trip.trip_id,
+  trip.start_date,
+  trip.subscriber_type,
+  trip.start_station_name,
+  trip.start_station_id,
+  stas.station_id,
+  stas.name,
+  stas.landmark
+FROM 
+bigquery-public-data.san_francisco.bikeshare_trips AS trip 
+  JOIN
+bigquery-public-data.san_francisco.bikeshare_stations AS stas
+ON trip.start_station_id  = stas.station_id
+WHERE trip.subscriber_type ='Subscriber' and trip.start_date BETWEEN '2016-04-01 00:00:01' AND '2016-06-30 23:59:59' and stas.landmark='Redwood City'
+
+##Count Q1 2016
+SELECT 
+  count(trip.trip_id)
+FROM 
+bigquery-public-data.san_francisco.bikeshare_trips AS trip 
+  JOIN
+bigquery-public-data.san_francisco.bikeshare_stations AS stas
+ON trip.start_station_id  = stas.station_id
+WHERE trip.subscriber_type ='Subscriber' and trip.start_date BETWEEN '2016-01-01 00:00:01' AND '2016-03-31 23:59:59' and stas.landmark='Redwood City'
+## Pada Q1 didapatkan entry data sebanyak 409 entry dari tipe subscriiber di area Redwood City
+
+##Count Q2 2016 
+SELECT 
+  count(trip.trip_id)
+FROM 
+bigquery-public-data.san_francisco.bikeshare_trips AS trip 
+  JOIN
+bigquery-public-data.san_francisco.bikeshare_stations AS stas
+ON trip.start_station_id  = stas.station_id
+WHERE trip.subscriber_type ='Subscriber' and trip.start_date BETWEEN '2016-04-01 00:00:01' AND '2016-06-30 23:59:59' and stas.landmark='Redwood City'
+## Pada Q1 didapatkan entry data sebanyak 341 entry dari tipe subscriiber di area Redwood City
+
+
+### Dapat disimpulkan bahwa peminjaman sepeda lebih tinggi pada Q1 2016 dibandingkan Q2 2016 di Redwood City 
+### SQL by FERDIANSYAH ERSATIYO
